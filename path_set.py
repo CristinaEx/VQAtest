@@ -1,0 +1,9 @@
+PROJECT_PATH = 'D:\\VQA'
+VAL_DATA_TYPE = 'val2014'
+DATA_PATH = 'D:\\VQA\\coco_qa'
+VERSION_TYPE ='v2_'
+DATA_TYPE = 'mscoco'
+TASK_TYPE = 'OpenEnded'
+TRAIN_DATA_TYPE = 'train2014'
+TRAIN_DATA_PATH = '{}\\images\\{}\\'.format(DATA_PATH,TRAIN_DATA_TYPE)
+VAL_DATA_PATH = '{}\\images\\{}\\'.format(DATA_PATH,VAL_DATA_TYPE)
