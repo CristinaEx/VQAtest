@@ -13,17 +13,41 @@ def createAnswersDict():
     start_id = reader.get_next_pic_id()
     qa = reader.get_pic_qa(start_id)
     for q in qa:
+        answers = dict()
         for a in q['answers']:
             answer = a['answer']
-            dealer.deal(answer)
+            weight = 0
+            if a['answer_confidence'] == 'yes':
+                weight = 1
+            elif a['answer_confidence'] == 'maybe':
+                weight = 0.5
+            if not answer in answers.keys():
+                answers[answer] = 0
+            answers[answer] = answers[answer] + weight
+            answers_list = []
+        for key in answers.keys():
+            if answers[key] >= 3:
+                dealer.deal(key)
     now_id = reader.get_next_pic_id()
     i = 0
     while now_id != start_id:
         qa = reader.get_pic_qa(now_id)
         for q in qa:
+            answers = dict()
             for a in q['answers']:
                 answer = a['answer']
-                dealer.deal(answer)
+                weight = 0
+                if a['answer_confidence'] == 'yes':
+                    weight = 1
+                elif a['answer_confidence'] == 'maybe':
+                    weight = 0.5
+                if not answer in answers.keys():
+                    answers[answer] = 0
+                answers[answer] = answers[answer] + weight
+                answers_list = []
+            for key in answers.keys():
+                if answers[key] >= 3:
+                    dealer.deal(key)
         now_id = reader.get_next_pic_id()
         i = i + 1
         if i % 1000 == 0:
@@ -58,5 +82,5 @@ def createQuestionsDict():
     print('over!')
 
 if __name__ == '__main__':
-    # createAnswersDict()
-    createQuestionsDict()
+    createAnswersDict()
+    # createQuestionsDict()

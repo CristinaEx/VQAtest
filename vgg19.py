@@ -7,7 +7,7 @@ class VGG19model:
     def __init__(self):
         pass
 
-    def loadWeightsAndBiases(self, file_path,trainable = True):
+    def loadWeightsAndBiases(self,file_path,trainable = True):
         """
         导入参数
         file_path:导入数据的位置和文件名
@@ -164,6 +164,10 @@ class VGG19model:
         conv16 = self.conv2d(conv15, weights['wc16'], biases['bc16']) 
         # Max Pooling  
         pool5 = self.maxpool2d(conv16, k=2)  
+
+        if output_hiding:
+            return pool5
+
         # Fully connected layer  
         # Reshape conv2 output to fit fully connected layer input  
         fc1 = tf.reshape(pool5, [-1, 7*7*512])  
@@ -171,13 +175,13 @@ class VGG19model:
         fc1 = tf.nn.relu(fc1)  
         # Apply Dropout  
         # fc1 = tf.nn.dropout(fc1, dropout)  
+
         # fc2 = tf.reshape(fc1, [-1, weights['wd2'].get_shape().as_list()[0]])  
         fc2 = tf.add(tf.matmul(fc1, weights['wd2']), biases['bd2'])  
         fc2 = tf.nn.relu(fc2)   
         # Apply Dropout  
         # fc2 = tf.nn.dropout(fc2, dropout)  
-        if output_hiding:
-            return fc2
+
         # Output, class prediction  
         out = tf.add(tf.matmul(fc2, weights['out']), biases['out'])  
         # out = self.conv2d(fc2, weights['out'], biases['out']) 

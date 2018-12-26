@@ -5,6 +5,7 @@ import os
 import re
 
 # 对句子进行拆分，单词索引标记等工作
+# One-Hot标签的预处理
 class DataDealer:
     
     def __init__(self,path):
@@ -59,7 +60,14 @@ class DataDealer:
         """
         return self.load_dict['WORD_NUM']
 
+    def getWord(self,index):
+        """
+        获取序号为index单词
+        """
+        for key in self.load_dict.keys():
+            if self.load_dict[key] == index:
+                return key
+
 if __name__ == '__main__':
-    dealer = DataDealer("dict\\dict.json")
-    print(dealer.deal("how many apples are there?"))
-    dealer.saveData()
+    dealer = DataDealer("dict\\answers_dict.json")
+    print(dealer.deal('no'))

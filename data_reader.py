@@ -76,6 +76,8 @@ class DataReader:
 
 if __name__ == '__main__':
     reader = DataReader(TRAIN_DATA_TYPE)
-    reader.set_pos()
-    print(reader.get_pic_qa(reader.get_next_pic_id()))
+    reader.set_pos(100)
+    id_ = reader.get_next_pic_id()
+    print(id_)
+    print(reader.get_pic_qa(id_))
     
