@@ -1,9 +1,4 @@
 
-大数据作业报告
-人员组成：XXX
-组长：XXX
-
-
 ## 新技术在 Visual Question Answering中的应用
 ### 摘要
 - Visual Question Answer (VQA) 是对视觉图像的自然语言问答，作为视觉理解 (Visual Understanding) 的一个研究方向，连接着视觉和语言。问题的格式是给定一张图片，并提出关于这张图片的问题，获得该问题的回答。
